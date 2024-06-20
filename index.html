@@ -10,134 +10,173 @@
     <link href="https://unpkg.com/videojs-vr/dist/videojs-vr.css" rel="stylesheet" />
 
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        .video-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        #video360 {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            object-fit: cover; /* Ensures the video covers the entire screen */
-        }
-        audio {
-            display: none; /* Hides the audio controls */
-        }
-        /* Loading screen styles */
-        #loadingScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 0.9;
-        }
-        #loadingScreen img {
-            width: 50%;
-            height: auto; /* Maintain aspect ratio */
-            opacity: 0.9; /* Reduce opacity of the GIF */
-        }
-        .panel {
-            position: absolute;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border-radius: 15px;
-            padding: 10px;
-            z-index: 2;
-        }
-        button {
-            padding: 10px;
-            margin: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            background-color: transparent;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            transition: transform 0.3s, color 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        button img {
-            width: 35px; /* Set the icon size */
-            height: 35px;
-            margin-bottom: 5px;
-        }
-        button span {
-            font-size: 10px;
-        }
-        button:hover {
-            transform: translateY(-2px);
-        }
-        .home-button img,
-        .home-button span {
-            color: silver;
-        }
+     body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
-        .glow {
-            animation: glow 1s infinite alternate;
-        }
+.video-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
 
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 10px 2px;
-            }
-            to {
-                box-shadow: 0 0 20px 5px;
-            }
-        }
+#video360 {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover; /* Ensures the video covers the entire screen */
+}
 
-        #root.glow {
-            box-shadow: 0 0 20px red;
-        }
+audio {
+    display: none; /* Hides the audio controls */
+}
 
-        #sacral.glow {
-            box-shadow: 0 0 20px orange;
-        }
+/* Loading screen styles */
+#loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0.9;
+}
 
-        #solar-plexus.glow {
-            box-shadow: 0 0 20px yellow;
-        }
+#loadingScreen img {
+    width: 50%;
+    height: auto; /* Maintain aspect ratio */
+    opacity: 0.9; /* Reduce opacity of the GIF */
+}
 
-        #heart.glow {
-            box-shadow: 0 0 20px green;
-        }
+.panel {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    padding: 10px;
+    z-index: 2;
+}
 
-        #throat.glow {
-            box-shadow: 0 0 20px blue;
-        }
+button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
-        #third-eye.glow {
-            box-shadow: 0 0 20px indigo;
-        }
+button img {
+    width: 35px; /* Set the icon size */
+    height: 35px;
+    margin-bottom: 5px;
+}
 
-        #crown.glow {
-            box-shadow: 0 0 20px purple;
-        }
+button span {
+    font-size: 10px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.home-button img,
+.home-button span {
+    color: silver;
+}
+
+/* Glow animation */
+.glow {
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px 2px rgba(255, 0, 0, 0.8); /* Red glow */
+    }
+    to {
+        box-shadow: 0 0 20px 5px rgba(255, 0, 0, 1); /* Red glow */
+    }
+}
+
+#sacral.glow {
+    from {
+        box-shadow: 0 0 10px 2px rgba(255, 165, 0, 0.8); /* Orange glow */
+    }
+    to {
+        box-shadow: 0 0 20px 5px rgba(255, 165, 0, 1); /* Orange glow */
+    }
+}
+
+#solar-plexus.glow {
+    from {
+        box-shadow: 0 0 10px 2px rgba(255, 255, 0, 0.8); /* Yellow glow */
+    }
+    to {
+        box-shadow: 0 0 20px 5px rgba(255, 255, 0, 1); /* Yellow glow */
+    }
+}
+
+#heart.glow {
+    from {
+        box-shadow: 0 0 10px 2px rgba(0, 128, 0, 0.8); /* Green glow */
+    }
+    to {
+        box-shadow: 0 0 20px 5px rgba(0, 128, 0, 1); /* Green glow */
+    }
+}
+
+#throat.glow {
+    from {
+        box-shadow: 0 0 10px 2px rgba(0, 0, 255, 0.8); /* Blue glow */
+    }
+    to {
+        box-shadow: 0 0 20px 5px rgba(0, 0, 255, 1); /* Blue glow */
+    }
+}
+
+#third-eye.glow {
+    from {
+        box-shadow: 0 0 10px 2px rgba(75, 0, 130, 0.8); /* Indigo glow */
+    }
+    to {
+        box-shadow: 0 0 20px 5px rgba(75, 0, 130, 1); /* Indigo glow */
+    }
+}
+
+#crown.glow {
+    from {
+        box-shadow: 0 0 10px 2px rgba(128, 0, 128, 0.8); /* Purple glow */
+    }
+    to {
+        box-shadow: 0 0 20px 5px rgba(128, 0, 128, 1); /* Purple glow */
+    }
+}
+
     </style>
 </head>
 <body>
