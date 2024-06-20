@@ -108,13 +108,8 @@ button:hover {
 .home-button span {
     color: silver;
 }
-
 /* Glow animation */
-.glow {
-    animation: glow 1s infinite alternate;
-}
-
-@keyframes glow {
+@keyframes glow-root {
     from {
         box-shadow: 0 0 10px 2px rgba(255, 0, 0, 0.8); /* Red glow */
     }
@@ -123,7 +118,7 @@ button:hover {
     }
 }
 
-#sacral.glow {
+@keyframes glow-sacral {
     from {
         box-shadow: 0 0 10px 2px rgba(255, 165, 0, 0.8); /* Orange glow */
     }
@@ -132,7 +127,7 @@ button:hover {
     }
 }
 
-#solar-plexus.glow {
+@keyframes glow-solar-plexus {
     from {
         box-shadow: 0 0 10px 2px rgba(255, 255, 0, 0.8); /* Yellow glow */
     }
@@ -141,7 +136,7 @@ button:hover {
     }
 }
 
-#heart.glow {
+@keyframes glow-heart {
     from {
         box-shadow: 0 0 10px 2px rgba(0, 128, 0, 0.8); /* Green glow */
     }
@@ -150,7 +145,7 @@ button:hover {
     }
 }
 
-#throat.glow {
+@keyframes glow-throat {
     from {
         box-shadow: 0 0 10px 2px rgba(0, 0, 255, 0.8); /* Blue glow */
     }
@@ -159,7 +154,7 @@ button:hover {
     }
 }
 
-#third-eye.glow {
+@keyframes glow-third-eye {
     from {
         box-shadow: 0 0 10px 2px rgba(75, 0, 130, 0.8); /* Indigo glow */
     }
@@ -168,13 +163,42 @@ button:hover {
     }
 }
 
-#crown.glow {
+@keyframes glow-crown {
     from {
         box-shadow: 0 0 10px 2px rgba(128, 0, 128, 0.8); /* Purple glow */
     }
     to {
         box-shadow: 0 0 20px 5px rgba(128, 0, 128, 1); /* Purple glow */
     }
+}
+
+/* Apply glow animation dynamically */
+#root.glow {
+    animation: glow-root 1s infinite alternate;
+}
+
+#sacral.glow {
+    animation: glow-sacral 1s infinite alternate;
+}
+
+#solar-plexus.glow {
+    animation: glow-solar-plexus 1s infinite alternate;
+}
+
+#heart.glow {
+    animation: glow-heart 1s infinite alternate;
+}
+
+#throat.glow {
+    animation: glow-throat 1s infinite alternate;
+}
+
+#third-eye.glow {
+    animation: glow-third-eye 1s infinite alternate;
+}
+
+#crown.glow {
+    animation: glow-crown 1s infinite alternate;
 }
 
     </style>
@@ -284,25 +308,33 @@ button:hover {
             }
         }
 
-               function glowChakra() {
-            const chakras = ['root', 'sacral', 'solar-plexus', 'heart', 'throat', 'third-eye', 'crown'];
-            let currentChakra = 0;
+             function glowChakra() {
+    const chakras = ['root', 'sacral', 'solar-plexus', 'heart', 'throat', 'third-eye', 'crown'];
+    let currentChakra = 0;
 
-            function activateGlow() {
-                // Remove glow class from all buttons
-                chakras.forEach(chakra => document.getElementById(chakra).classList.remove('glow'));
-                
-                // Add glow class to the current chakra button
-                document.getElementById(chakras[currentChakra]).classList.add('glow');
-                
-                // Move to the next chakra after 5 minutes
-                currentChakra = (currentChakra + 1) % chakras.length;
-                setTimeout(activateGlow, 5 * 60 * 1000); // 5 minutes
-            }
-            
-            // Start the glow cycle
-            activateGlow();
-        }
+    function activateGlow() {
+        // Remove glow class from all buttons
+        chakras.forEach(chakra => document.getElementById(chakra).classList.remove('glow'));
+        
+        // Add glow class to the current chakra button
+        document.getElementById(chakras[currentChakra]).classList.add('glow');
+        
+        // Move to the next chakra after 5 minutes
+        currentChakra = (currentChakra + 1) % chakras.length;
+    }
+    
+    // Initial start of glow
+    activateGlow();
+
+    // Set interval to switch glow every 5 minutes
+    setInterval(() => {
+        activateGlow();
+    }, 5 * 60 * 1000); // 5 minutes interval
+}
+
+// Start the glowing process when the page loads
+window.onload = glowChakra;
+
     </script>
 </body>
 </html>
