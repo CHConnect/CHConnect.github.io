@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CH Wellness</title>
+    <!-- Video.js CSS -->
+    <link href="https://vjs.zencdn.net/7.14.3/video-js.css" rel="stylesheet" />
+    <!-- videojs-vr CSS -->
+    <link href="https://unpkg.com/videojs-vr/dist/videojs-vr.css" rel="stylesheet" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=XroHy4tYNwT-RVhSIUk-rUxT7B3NYI30wlj7RWTwhGIytbrpa-GSKP1AmCZjzvAXC1gJK2RzCn9v3onIjbaSEQ" charset="UTF-8"></script><style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .video-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        #video360 {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover; /* Ensures the video covers the entire screen */
+        }
+        audio {
+            display: none; /* Hides the audio controls */
+        }
+        /* Loading screen styles */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0.9;
+        }
+        #loadingScreen img {
+            width: 50%;
+            height: auto; /* Maintain aspect ratio */
+            opacity: 0.8; /* Reduce opacity of the GIF */
+        }
+        .panel {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 10px;
+            z-index: 2;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s, color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        button i {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        button span {
+            font-size: 10px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .home-button i {
+            color: silver;
+        }
+        .home-button span {
+            color: silver;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <video id="video360" class="video-js vjs-default-skin" autoplay loop muted>
+            <source src="media/vr.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="panel">
+            <button class="home-button" onclick="goHome()">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Background Audio -->
+    <audio id="background-audio" autoplay loop>
+        <source src="audio.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Video.js script -->
+    <script src="https://vjs.zencdn.net/7.14.3/video.js"></script>
+    <!-- videojs-vr script -->
+    <script src="https://unpkg.com/videojs-vr/dist/videojs-vr.min.js"></script>
+    <script>
+        // Initialize the video.js player
+        var player = videojs('video360', {
+            controls: false, // Hide all controls
+            loop: true,
+            autoplay: true,
+            muted: true
+        });
+
+        // Initialize the VR plugin with adjusted perspective
+        player.vr({
+            projection: '360',
+            initYaw: 180, // Adjust initial yaw (horizontal angle)
+            initPitch: -30, // Adjust initial pitch (vertical angle) to look lower
+            initRoll: 0 // Adjust initial roll (rotation)
+        });
+
+        // Ensure audio is played after interaction if autoplay is restricted
+        window.addEventListener('click', function() {
+            var audio = document.getElementById('background-audio');
+            if (audio.paused) {
+                audio.play();
+            }
+        });
+
+        // Hide loading screen after 10 seconds
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.display = 'none';
+            }, 10000); // 10 seconds
+        };
+
+        function goHome() {
+            window.location.href = "index.php";
+        }
+    </script>
+</body>
+</html>
