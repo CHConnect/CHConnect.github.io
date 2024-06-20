@@ -97,6 +97,48 @@
         .home-button span {
             color: silver;
         }
+
+        .glow {
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px 2px;
+    }
+    to {
+        box-shadow: 0 0 20px 5px;
+    }
+}
+
+#root.glow {
+    box-shadow: 0 0 20px red;
+}
+
+#sacral.glow {
+    box-shadow: 0 0 20px orange;
+}
+
+#solar-plexus.glow {
+    box-shadow: 0 0 20px yellow;
+}
+
+#heart.glow {
+    box-shadow: 0 0 20px green;
+}
+
+#throat.glow {
+    box-shadow: 0 0 20px blue;
+}
+
+#third-eye.glow {
+    box-shadow: 0 0 20px indigo;
+}
+
+#crown.glow {
+    box-shadow: 0 0 20px purple;
+}
+
     </style>
 </head>
 <body>
@@ -113,35 +155,37 @@
                 <img src="https://static.vecteezy.com/system/resources/previews/021/948/181/non_2x/3d-home-icon-free-png.png" alt="Home Icon">
                 <span>Home</span>
             </button>
-           <button onclick="playVideo('root-m.mp4', 'audio.mp3', false)">
+
+            <button id="root" onclick="playVideo('root-m.mp4', 'audio.mp3', false)">
     <img src="1.png" alt="Root Chakra Icon">
     <span>Root Chakra</span>
 </button>
-<button onclick="playVideo('sacral-m.mp4', 'sacral.mp3', false)">
+<button id="sacral" onclick="playVideo('sacral-m.mp4', 'sacral.mp3', false)">
     <img src="2.png" alt="Sacral Chakra Icon">
     <span>Sacral Chakra</span>
 </button>
-<button onclick="playVideo('mode3.mp4', 'mode3.mp3', false)">
+<button id="solar-plexus" onclick="playVideo('mode3.mp4', 'mode3.mp3', false)">
     <img src="3.png" alt="Solar Plexus Chakra Icon">
     <span>Solar Plexus Chakra</span>
 </button>
-<button onclick="playVideo('mode4.mp4', 'mode4.mp3', false)">
+<button id="heart" onclick="playVideo('mode4.mp4', 'mode4.mp3', false)">
     <img src="4.png" alt="Heart Chakra Icon">
     <span>Heart Chakra</span>
 </button>
-<button onclick="playVideo('mode5.mp4', 'mode5.mp3', false)">
+<button id="throat" onclick="playVideo('mode5.mp4', 'mode5.mp3', false)">
     <img src="5.png" alt="Throat Chakra Icon">
     <span>Throat Chakra</span>
 </button>
-<button onclick="playVideo('mode6.mp4', 'mode6.mp3', false)">
+<button id="third-eye" onclick="playVideo('mode6.mp4', 'mode6.mp3', false)">
     <img src="6.png" alt="Third Eye Chakra Icon">
     <span>Third Eye Chakra</span>
 </button>
-<button onclick="playVideo('mode7.mp4', 'mode7.mp3', false)">
+<button id="crown" onclick="playVideo('mode7.mp4', 'mode7.mp3', false)">
     <img src="7.png" alt="Crown Chakra Icon">
     <span>Crown Chakra</span>
 </button>
 
+          
         </div>
     </div>
     
@@ -200,6 +244,31 @@
                 audio.play();
             }
         }
+
+
+        function glowChakra() {
+    const chakras = ['root', 'sacral', 'solar-plexus', 'heart', 'throat', 'third-eye', 'crown'];
+    let currentChakra = 0;
+
+    function activateGlow() {
+        // Remove glow class from all buttons
+        chakras.forEach(chakra => document.getElementById(chakra).classList.remove('glow'));
+        
+        // Add glow class to the current chakra button
+        document.getElementById(chakras[currentChakra]).classList.add('glow');
+        
+        // Move to the next chakra after 5 minutes
+        currentChakra = (currentChakra + 1) % chakras.length;
+        setTimeout(activateGlow, 5 * 60 * 1000);
+    }
+    
+    // Start the glow cycle
+    activateGlow();
+}
+
+// Start the glowing process when the page loads
+window.onload = glowChakra;
+
     </script>
 </body>
 </html>
